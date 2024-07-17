@@ -1,0 +1,16 @@
+<div class="p-4">
+  <h2 class="text-xl font-bold mb-4">Add Workout</h2>
+  <div class="mb-4">
+    <label for="name" class="block text-sm font-medium text-gray-700">User Name</label>
+    <input type="text" id="name" [(ngModel)]="userName" class="mt-1 p-2 border rounded w-full shadow-xl">
+  </div>
+  <div class="mb-4">
+    <label for="workoutType" class="block text-sm font-medium text-gray-700">Workout Type</label>
+    <input type="text" id="workoutType" [(ngModel)]="workoutType" class="mt-1 p-2 border rounded w-full shadow-xl">
+  </div>
+  <div class="mb-4">
+    <label for="workoutMinutes" class="block text-sm font-medium text-gray-700">Workout Minutes</label>
+    <input type="number" id="workoutMinutes" [(ngModel)]="workoutMinutes" class="mt-1 p-2 border rounded w-full shadow-xl">
+  </div>
+  <button (click)="addWorkout()" class="shadow-xl bg-blue-500 text-black text-md py-3 px-2 rounded-xl bg-indigo-500 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Workout</button>
+</div>

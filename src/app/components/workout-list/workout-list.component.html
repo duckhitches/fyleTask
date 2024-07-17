@@ -1,0 +1,60 @@
+<br><br>
+<div class="mb-4">
+  <label for="filterWorkoutType" class="block text-md font-medium text-gray-700">Filter by Workout Type</label>
+  <select id="filterWorkoutType" [(ngModel)]="selectedWorkoutType" (change)="filterWorkouts()"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm  sm:text-sm shadow-xl">
+    <option value="">All</option>
+    <option value="Running">Running</option>
+    <option value="Cycling">Cycling</option>
+    <option value="Swimming">Swimming</option>
+    <option value="Yoga">Yoga</option>
+  </select>
+</div>
+
+<table class="min-w-full divide-y divide-gray-200 shadow-xl">
+  <thead class="bg-gray-50 ">
+    <tr>
+      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Workout Type</th>
+      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Minutes</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let user of paginatedUsers">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ user.name }}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <ul>
+          <li *ngFor="let workout of user.workouts">{{ workout.type }}</li>
+        </ul>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <ul>
+          <li *ngFor="let workout of user.workouts">{{ workout.minutes }}</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<div class="flex align-items-center justify-content-start">
+  <div class="flex justify-content-center align-items-center gap-5">
+      <span>Items per page: </span>
+      <p-slider [(ngModel)]="rowsPerPage"  [style]="{ width: '10rem' }" [min]="10" [max]="120" [step]="30" />
+  </div>
+  <p-paginator (onPageChange)="paginate($event)" [rows]="rowsPerPage" [totalRecords]="filteredUsers.length" [showFirstLastIcon]="false" 
+      [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" ></p-paginator>
+</div>
+<!-- <div class="flex align-items-center justify-content-start">
+  <span class="mx-1 text-color">Items per page: </span>
+ 
+  <p-paginator [rows]="rowsPerPage" [totalRecords]="filteredUsers.length" (onPageChange)="paginate($event)" [showCurrentPageReport]="true"
+  currentPageReportTemplate="{first} - {last} of {totalRecords}" [showPageLinks]="false" [showFirstLastIcon]="false" ></p-paginator>
+ </div> -->
+
+<!-- <p-paginator 
+  [rows]="rowsPerPage" 
+  [totalRecords]="filteredUsers.length" 
+  (onPageChange)="paginate($event)">
+</p-paginator> -->
