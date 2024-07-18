@@ -33,7 +33,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## Screenshot of component&service test using karma
-
+I have created and used another folder called testingAngular for single component&service testing to avoid warnings.
 
 
 ![Screenshot (216)](https://github.com/user-attachments/assets/0624cc66-ed4f-4742-85b0-68252b64c7a4)
