@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
     this.users = [
       { name: 'John', workouts: [{ type: 'Running', minutes: 30 }, { type: 'Cycling', minutes: 20 }] },
       { name: 'Jane', workouts: [{ type: 'Yoga', minutes: 45 }, { type: 'Swimming', minutes: 35 }] },
+      { name: 'Mike Johnson', workouts: [{ type: 'Yoga', minutes: 50 }, { type: 'Cycling', minutes: 40 }] },
       // Add more sample data as needed
     ];
     this.filteredUsers = [...this.users];
