@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: workout-app
+    env: static
+    static_publish_path: dist/workout-app
+    build_command: ng build --prod
+    env_vars:
+      - key: NODE_ENV
+        value: production
