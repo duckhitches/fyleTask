@@ -32,20 +32,23 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ![Screenshot (214)](https://github.com/user-attachments/assets/1389e9ac-63da-4cf6-8f11-b96674ca65b2)
 
 
-## FScreenshot of component&service test using karma
+## Screenshot of component&service test using karma
 ![Screenshot (216)](https://github.com/user-attachments/assets/0624cc66-ed4f-4742-85b0-68252b64c7a4)
 
 
 
 
-## The Tas Given: https://fyleuniverse.notion.site/Frontend-Development-Challenge-091d1fad48d94c6a9de0c02465cc640a#1b11c0778c7d4f8bb12dcdcecbea27b6
+## The Task Given: https://fyleuniverse.notion.site/Frontend-Development-Challenge-091d1fad48d94c6a9de0c02465cc640a#1b11c0778c7d4f8bb12dcdcecbea27b6
 
 
 ## Assumptions
 Using lastest angular CLi doesnt include app.module.ts
 SO install it by ng new testAng --no-standalone --routing --ssr=false  ref:stackoverflow
-And to host angular application was messy in render,hostify and netlify. I deployed recent react on netflify cause the process was easier there to deploy, but its not the same case with angular application. Hence I used vercel, but vercel doesnt read already predefined values which are already defined in app.component.ts.(THE JSON DATA PROVIDED BY FYLE)
-When it comes to unit testing, Karma and jasmine works better with karma.conf.js with little modification (coverageReporter: {
+And to host angular application was messy in render,hostify and netlify.
+I deployed recent react on netflify cause the process was easier there to deploy, but its not the same case with angular application. 
+Hence I used vercel, but vercel doesnt read already predefined values which are already defined in app.component.ts.(THE JSON DATA PROVIDED BY FYLE)
+When it comes to unit testing, Karma and jasmine works better with karma.conf.js with little modification (
+coverageReporter: {
         dir: require('path').join(__dirname, './coverage/YOUR-PROJECT-NAME'), //MINE IS TESTINGANGULAR BECAUSE I TESTED THE COMPONENT AND SERVICE IN NEW ANGULAR FOLDER.NOT MY MAIN WORK-APP FOLDER.'';
         subdir: '.',
         reporters: [
