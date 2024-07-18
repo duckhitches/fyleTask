@@ -10,7 +10,7 @@ const routes: Routes = [
 
   { path: '', component: AppComponent },
   { path: 'chart', component: WorkoutChartComponent },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }  //if any url is undefined it'll move to root url
 ];
 
 @NgModule({
