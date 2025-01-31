@@ -45,4 +45,4 @@ coverageReporter: {
       })
 
 
-## HOSTED  APPLICATION LINK OF VERCEL : https://fyle-task-eshan.vercel.app
+## HOSTED  APPLICATION LINK OF VERCEL : https://fyle-task-eshan-rust.vercel.app
