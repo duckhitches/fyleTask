@@ -1,4 +1,4 @@
-# WorkoutApp
+# WorkoutApp/Workout Tracker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
 
@@ -29,21 +29,21 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-## Coverage summary and report
-Instead of 1 component, I have tested 3-components(user-form, workout-list, workout-chart) and 1-service(UserDataService) for my own satisfaction. Testing done with Karma by ng test --code-coverage.
+## Code Coverage summary and report
+Instead of 1 component, I have tested 3-components(user-form, workout-list, workout-chart) and 1-service(UserDataService) for my own satisfaction. Testing done with Karma offcourse by cmd "ng test --code-coverage".
 
 Statements   : 95.6% ( 87/91 )
 Branches     : 72.22% ( 13/18 )
 Functions    : 96.87% ( 31/32 )
 Lines        : 95.23% ( 80/84 )
 
-## Coverage summary screenshots
+## Code Coverage summary screenshot
 
 
 
 
-## My assumptions
-Is that (for github users) is that make sure the components imports are proper in app.module.ts, cause we might mistakenly add the standalone components in ngModel
+## My assumptions (for github users)
+Is that make sure the components imports are proper in app.module.ts, cause we might mistakenly add the standalone components in @NgModule, it can cause errors. To suppress unnecessary ts errors, you can check my tsconfig.json. If you are importing this project for playing around, dont make any change in tsconfig.json as I have already added enough warning suppressions. And also if you were to test appComponent, DO NOT MESS WITH TITLE or container or child module imports or html , It's a mess to solve. Or just import app-component, as soon as you create it.
 
 
 ## HOSTED  APPLICATION LINK OF VERCEL : [fyle-task](https://fyle-task-eshan-rust.vercel.app/)
