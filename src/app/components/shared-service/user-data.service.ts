@@ -23,7 +23,7 @@ export class UserDataService {
   userData$ = this.userData.asObservable();
 
   private loadUserData(): User[] {
-    const data = localStorage.getItem(this.userDataKey);
+    const data = localStorage.getItem(this.userDataKey);  //for storing in local storage
     return data ? JSON.parse(data) : [
         {
             id: 1,

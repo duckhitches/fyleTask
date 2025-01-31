@@ -27,4 +27,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 
-## HOSTED  APPLICATION LINK OF VERCEL : [https://fyle-task-eshan.vercel.app](https://fyle-task-eshan-rust.vercel.app/)
+
+
+## Coverage summary and report
+Instead of 1 component, I have tested 3-components(user-form, workout-list, workout-chart) and 1-service(UserDataService) for my own satisfaction. Testing done with Karma by ng test --code-coverage.
+
+Statements   : 95.6% ( 87/91 )
+Branches     : 72.22% ( 13/18 )
+Functions    : 96.87% ( 31/32 )
+Lines        : 95.23% ( 80/84 )
+
+## Coverage summary screenshots
+
+
+
+
+## My assumptions
+Is that (for github users) is that make sure the components imports are proper in app.module.ts, cause we might mistakenly add the standalone components in ngModel
+
+
+## HOSTED  APPLICATION LINK OF VERCEL : [fyle-task](https://fyle-task-eshan-rust.vercel.app/)
