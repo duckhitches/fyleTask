@@ -66,6 +66,8 @@ export class UserDataService {
     users.push(newUser);
     this.saveUserData(users);
   }
+ 
+  //If you want you can add delete/update user
 
   addWorkoutToUser(userName: string, workout: Workout): void {
     const users = this.getUsers();
