@@ -16,7 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     UserFormComponent,
-   
     WorkoutChartComponent
   ],
   imports: [
@@ -26,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     PaginatorModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    WorkoutListComponent
+    WorkoutListComponent //declared as standalone since it handles a lot of methods
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

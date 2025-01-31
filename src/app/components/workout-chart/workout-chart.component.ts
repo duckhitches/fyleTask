@@ -38,7 +38,7 @@ export class WorkoutChartComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
     if (this.chart) {
-      this.chart.destroy();
+      this.chart.destroy(); //destroys the existing data to display a new chart on new data
     }
   }
 

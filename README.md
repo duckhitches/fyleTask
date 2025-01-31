@@ -27,4 +27,4 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 
-## HOSTED  APPLICATION LINK OF VERCEL : [https://fyle-task-eshan.vercel.app](https://fyle-task-eshan-pxrcu5sm9-duckhitches-projects.vercel.app/)
+## HOSTED  APPLICATION LINK OF VERCEL : [https://fyle-task-eshan.vercel.app](https://fyle-task-eshan-rust.vercel.app/)

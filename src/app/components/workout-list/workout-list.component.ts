@@ -26,7 +26,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   filteredUsers: User[] = [];
   paginatedUsers: User[] = [];
 
-  Math = Math;
+  Math = Math; //defining math
 
   searchName: string = '';
   selectedWorkoutType: string = '';
