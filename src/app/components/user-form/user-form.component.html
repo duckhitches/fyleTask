@@ -1,6 +1,13 @@
-<br><br>
 <div class="container mx-auto max-w-4xl p-10 mt-7 bg-white shadow-2xl rounded-lg font-montserrat">
   <h2 class="text-2xl font-bold text-center mb-6 text-primary">Add Workout</h2>
+  
+  <!-- Success message -->
+  <div 
+    *ngIf="showMessage" 
+    class="p-4 mb-4 text-green-700 bg-green-100 border border-green-300 rounded"
+  >
+    User added successfully!
+  </div>
   
   <form (ngSubmit)="addWorkout()" class="space-y-4">
     <div>
