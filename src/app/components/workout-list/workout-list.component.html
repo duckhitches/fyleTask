@@ -1,60 +1,127 @@
-<br><br>
-<div class="mb-4">
-  <label for="filterWorkoutType" class="block text-md font-medium text-gray-700">Filter by Workout Type</label>
-  <select id="filterWorkoutType" [(ngModel)]="selectedWorkoutType" (change)="filterWorkouts()"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm  sm:text-sm shadow-xl">
-    <option value="">All</option>
-    <option value="Running">Running</option>
-    <option value="Cycling">Cycling</option>
-    <option value="Swimming">Swimming</option>
-    <option value="Yoga">Yoga</option>
-  </select>
-</div>
+<div class="ccontainer mx-auto max-w-4xl p-10 mt-7 bg-white shadow-2xl rounded-lg font-montserrat">
+  <h2 class="text-2xl font-bold text-center mb-6 text-primary">Workout List</h2>
 
-<table class="min-w-full divide-y divide-gray-200 shadow-xl">
-  <thead class="bg-gray-50 ">
-    <tr>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Workout Type</th>
-      <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Minutes</th>
-    </tr>
-  </thead>
-  <tbody class="bg-white divide-y divide-gray-200">
-    <tr *ngFor="let user of paginatedUsers">
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ user.name }}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        <ul>
-          <li *ngFor="let workout of user.workouts">{{ workout.type }}</li>
-        </ul>
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        <ul>
-          <li *ngFor="let workout of user.workouts">{{ workout.minutes }}</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Search by Name
+      </label>
+      <input 
+        type="text" 
+        placeholder="Enter name" 
+        [(ngModel)]="searchName"
+        (ngModelChange)="applyFiltersAndPagination()"
+        class="w-full px-3 py-2 bg-slate-200 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary"
+      >
+    </div>
 
-<br>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Filter by Workout Type
+      </label>
+      <select 
+        [(ngModel)]="selectedWorkoutType"
+        (ngModelChange)="applyFiltersAndPagination()"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary"
+      >
+        <option value="">All Workout Types</option>
+        <option value="Running">Running</option>
+        <option value="Cycling">Cycling</option>
+        <option value="Swimming">Swimming</option>
+        <option value="Yoga">Yoga</option>
+      </select>
+    </div>
 
-<div class="flex align-items-center justify-content-start">
-  <div class="flex justify-content-center align-items-center gap-5">
-      <span>Items per page: </span>
-      <p-slider [(ngModel)]="rowsPerPage"  [style]="{ width: '10rem' }" [min]="10" [max]="120" [step]="30" />
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-2">
+        Items per Page
+      </label>
+      <select 
+        [(ngModel)]="itemsPerPage"
+        (ngModelChange)="applyFiltersAndPagination()"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-primary"
+      >
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="15">15</option>
+        <option [value]="20">20</option>
+      </select>
+    </div>
   </div>
-  <p-paginator (onPageChange)="paginate($event)" [rows]="rowsPerPage" [totalRecords]="filteredUsers.length" [showFirstLastIcon]="false" 
-      [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" ></p-paginator>
-</div>
-<!-- <div class="flex align-items-center justify-content-start">
-  <span class="mx-1 text-color">Items per page: </span>
- 
-  <p-paginator [rows]="rowsPerPage" [totalRecords]="filteredUsers.length" (onPageChange)="paginate($event)" [showCurrentPageReport]="true"
-  currentPageReportTemplate="{first} - {last} of {totalRecords}" [showPageLinks]="false" [showFirstLastIcon]="false" ></p-paginator>
- </div> -->
 
-<!-- <p-paginator 
-  [rows]="rowsPerPage" 
-  [totalRecords]="filteredUsers.length" 
-  (onPageChange)="paginate($event)">
-</p-paginator> -->
+  <div class="overflow-x-auto shadow-xl">
+    <table class="min-w-full divide-y divide-gray-200 shadow-2xl rounded-lg">
+      <thead class="bg-primary text-black shadow-lg font-bold">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Name</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Workout Types</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Total Minutes</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Number of Workouts</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr 
+          *ngFor="let user of paginatedUsers" 
+          class="hover:bg-gray-50 transition duration-200"
+        >
+          <td class="px-6 py-4 whitespace-nowrap text-sm  text-gray-900">
+            {{ user.name }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            <div class="flex flex-wrap gap-2">
+              <span 
+                *ngFor="let workout of user.workouts" 
+                class="px-2 py-1 bg-secondary text-gray-600 rounded-full text-md"
+              >
+                {{ workout.type }}
+              </span>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            {{ calculateTotalMinutes(user.workouts) }} mins
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+            {{ getWorkoutCount(user) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-6 flex flex-col md:flex-row justify-between items-center">
+    <div class="text-sm text-gray-700">
+      Showing 
+      {{ (currentPage - 1) * itemsPerPage + 1 }} 
+      to 
+      {{ Math.min(currentPage * itemsPerPage, filteredUsers.length) }} 
+      of 
+      {{ filteredUsers.length }} entries
+    </div>
+
+    <nav class="mt-4 md:mt-0">
+      <ul class="flex space-x-2">
+        <li>
+          <button class="px-3 py-1 border rounded-md bg-gray-100 hover:bg-gray-200 disabled:opacity-50 text-black"
+            [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+            Previous
+          </button>
+        </li>
+
+        <li *ngFor="let page of getPageNumbers()" class="mx-1 text-black">
+          <button class="px-3 py-1 border rounded-md text-black"
+            [class.bg-primary]="page === currentPage"
+            (click)="onPageChange(page)">
+            {{ page }}
+          </button>
+        </li>
+
+        <li>
+          <button class="px-3 py-1 border rounded-md bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+            [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+            Next
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

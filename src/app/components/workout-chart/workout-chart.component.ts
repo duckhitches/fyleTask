@@ -1,62 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { UserDataService } from '../shared-service/user-data.service';
+import { Subscription } from 'rxjs';
+
+interface Workout {
+  type: string;
+  minutes: number;
+}
+
+interface User {
+  id: number;
+  name: string;
+  workouts: Workout[];
+}
 
 @Component({
   selector: 'app-workout-chart',
-  templateUrl: './workout-chart.component.html',
-  styleUrls: ['./workout-chart.component.scss']
+  templateUrl: './workout-chart.component.html'
 })
-export class WorkoutChartComponent implements OnInit {
-  userData = [
-    {
-      id: 1,
-      name: 'John Doe',
-      workouts: [
-        { type: 'Running', minutes: 30 },
-        { type: 'Cycling', minutes: 45 }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      workouts: [
-        { type: 'Swimming', minutes: 60 },
-        { type: 'Running', minutes: 20 }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Mike Johnson',
-      workouts: [
-        { type: 'Yoga', minutes: 50 },
-        { type: 'Cycling', minutes: 40 }
-      ]
-    }
-  ];
+export class WorkoutChartComponent implements OnInit, OnDestroy {
+  users: User[] = [];
+  selectedUser: User | null = null;
+  private userSubscription!: Subscription;
+  private chart: Chart | null = null;
 
-  constructor() {}
+  constructor(private userDataService: UserDataService) {}
 
   ngOnInit(): void {
-    this.createChart();
+    this.userSubscription = this.userDataService.userData$.subscribe(users => {
+      this.users = users;
+      if (users.length > 0) {
+        this.selectUser(users[0]); // Default to the first user
+      }
+    });
   }
 
-  createChart(): void {
+  ngOnDestroy(): void {
+    this.userSubscription?.unsubscribe();
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
+  selectUser(user: User): void {
+    this.selectedUser = user;
+    this.updateChart(user);
+  }
+
+  updateChart(user: User): void {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
 
-    const labels = this.userData.map(user => user.name);
-    const data = this.userData.map(user => user.workouts.reduce((total, workout) => total + workout.minutes, 0));
+    if (this.chart) {
+      this.chart.destroy();
+    }
 
-    new Chart(ctx, {
+    const labels = user.workouts.map(workout => workout.type);
+    const data = user.workouts.map(workout => workout.minutes);
+
+    this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
-        datasets: [{
-          label: 'Total Workout Minutes',
-          data: data,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
+        datasets: [
+          {
+            label: 'Minutes',
+            data: data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }
+        ]
       },
       options: {
         scales: {

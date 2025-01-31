@@ -11,6 +11,8 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    //added this to disable "no initializer and is not definitely assigned in the constructor" error.
+    "strictPropertyInitialization": false,
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,

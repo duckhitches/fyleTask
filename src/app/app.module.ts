@@ -11,11 +11,12 @@ import { PaginatorModule } from 'primeng/paginator';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     UserFormComponent,
-    WorkoutListComponent,
+   
     WorkoutChartComponent
   ],
   imports: [
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
     TableModule,
     PaginatorModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    WorkoutListComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

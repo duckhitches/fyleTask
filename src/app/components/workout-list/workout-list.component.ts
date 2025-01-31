@@ -1,39 +1,96 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { UserDataService } from '../shared-service/user-data.service';
+import { Subscription } from 'rxjs';
+
+interface Workout {
+  type: string;
+  minutes: number;
+}
+
+interface User {
+  id: number;
+  name: string;
+  workouts: Workout[];
+}
 
 @Component({
   selector: 'app-workout-list',
   templateUrl: './workout-list.component.html',
-  styleUrls: ['./workout-list.component.css']
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
-export class WorkoutListComponent implements OnInit {
-  users: any[] = [];
-  filteredUsers: any[] = [];
-  paginatedUsers: any[] = [];
+export class WorkoutListComponent implements OnInit, OnDestroy {
+  users: User[] = [];
+  filteredUsers: User[] = [];
+  paginatedUsers: User[] = [];
+
+  Math = Math;
+
+  searchName: string = '';
   selectedWorkoutType: string = '';
-  rowsPerPage: number = 5;
-  currentPage: number = 0;
+
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 0;
+
+  private userSubscription!: Subscription;
+
+  constructor(private userDataService: UserDataService) {}
 
   ngOnInit() {
-    this.users = JSON.parse(localStorage.getItem('userData') || '[]');
-    this.filterWorkouts();
+    this.userSubscription = this.userDataService.userData$.subscribe(users => {
+      this.users = users;
+      this.applyFiltersAndPagination();
+    });
   }
 
-  filterWorkouts() {
-    if (this.selectedWorkoutType) {
-      this.filteredUsers = this.users.map(user => {
-        return {
-          ...user,
-          workouts: user.workouts.filter((workout: any) => workout.type === this.selectedWorkoutType)
-        };
-      }).filter(user => user.workouts.length > 0);
-    } else {
-      this.filteredUsers = [...this.users];
+  ngOnDestroy() {
+    this.userSubscription?.unsubscribe();
+  }
+
+  applyFiltersAndPagination() {
+    let filteredByName = this.searchName
+      ? this.users.filter(user =>
+          user.name.toLowerCase().includes(this.searchName.toLowerCase())
+        )
+      : this.users;
+
+    let filteredByType = this.selectedWorkoutType
+      ? filteredByName.filter(user =>
+          user.workouts.some(workout => workout.type === this.selectedWorkoutType)
+        )
+      : filteredByName;
+
+    this.filteredUsers = filteredByType;
+    this.totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
+    
+    this.paginateUsers();
+  }
+
+  paginateUsers() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedUsers = this.filteredUsers.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginateUsers();
     }
-    this.paginate({ first: 0, rows: this.rowsPerPage });
   }
 
-  paginate(event: any) {
-    this.currentPage = event.first / event.rows;
-    this.paginatedUsers = this.filteredUsers.slice(event.first, event.first + event.rows);
+  getPageNumbers(): number[] {
+    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+  }
+
+  calculateTotalMinutes(workouts: Workout[]): number {
+    return workouts.reduce((total, workout) => total + workout.minutes, 0);
+  }
+
+  getWorkoutCount(user: User): number {
+    return user.workouts.length;
   }
 }
