@@ -26,26 +26,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
-<<<<<<< HEAD
-
-
-## Assumptions
-Using lastest angular CLi doesnt include app.module.ts
-SO install it by ng new testAng --no-standalone --routing --ssr=false  ref:stackoverflow
-And to host angular application was messy in render,hostify and netlify.
-I deployed recent react on netflify cause the process was easier there to deploy, but its not the same case with angular application. 
-Hence I used vercel, but vercel doesnt read already predefined values which are already defined in app.component.ts.(THE JSON DATA PROVIDED BY FYLE)
-When it comes to unit testing, Karma and jasmine works better with karma.conf.js with little modification (
-coverageReporter: {
-        dir: require('path').join(__dirname, './coverage/YOUR-PROJECT-NAME'), //MINE IS TESTINGANGULAR BECAUSE I TESTED THE COMPONENT AND SERVICE IN NEW ANGULAR FOLDER.NOT MY MAIN WORK-APP FOLDER.'';
-        subdir: '.',
-        reporters: [
-          { type: 'html' },
-          { type: 'text-summary' }
-        ]
-      })
-
-=======
->>>>>>> f121e4e (Update README.md)
 
 ## HOSTED  APPLICATION LINK OF VERCEL : https://fyle-task-eshan-rust.vercel.app
+
+
