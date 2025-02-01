@@ -45,7 +45,8 @@ Lines        : 95.23% ( 80/84 )
 
 
 ## My assumptions (for github users)
-Is that make sure the components imports are proper in app.module.ts, cause we might mistakenly add the standalone components in @NgModule, it can cause errors. To suppress unnecessary ts errors, you can check my tsconfig.json. If you are importing this project for playing around, dont make any change in tsconfig.json as I have already added enough warning suppressions. And also if you were to test appComponent, DO NOT MESS WITH TITLE or container or child module imports or html , It's a mess to solve. Or just import app-component, as soon as you create it.
+Is that make sure the components imports are proper in app.module.ts, cause we might mistakenly add the standalone components in @NgModule, it can cause errors. To suppress unnecessary ts errors, you can check my tsconfig.json. If you are importing this project for playing around, dont make any change in tsconfig.json as I have already added enough warning suppressions. And also if you were to test appComponent, DO NOT MESS WITH TITLE or container or child module imports or html , It's a mess to solve. Or just import app-component, as soon as you create it or do testing after each unit component imports.
+To understand more about this project and improvements done, do visit my LinkedIn (through my GitHub profile) for more info.
 
 
-## HOSTED  APPLICATION LINK OF VERCEL : [fyle-task](https://fyle-task-eshan-rust.vercel.app/)
+## HOSTED APPLICATION LINK OF FyleTask : [fyle-task](https://fyle-task-eshan-rust.vercel.app/)
